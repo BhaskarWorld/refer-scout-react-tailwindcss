@@ -63,31 +63,50 @@ class App extends React.Component {
               CardsJson={[
                 {
                   src: "https://wallpaperaccess.com/full/1308159.jpg",
-                  title: "Amazon"
+                  title: "Amazon",
+                  "Product Details": {
+                    "Product Name": {"Dropdown":null, "Unit": null },
+                    "Quantity in stock": {"Dropdown":null, "Unit": "Units" },
+                    "Redemption Amt": {"Dropdown":null, "Unit": "Coins" },
+                    "Product Category": {"Dropdown":["Amazon","uihefdj","judi"], "Unit": null },
+                    "Delivery Method": {"Dropdown":["BHaskar","Amazon","judi"], "Unit": null },
+                  }
                 },
                 {
                   src: "https://images.indianexpress.com/2021/08/Spotify.jpg",
-                  title: "Spotify"
+                  title: "Spotify",
+                  "Product Details": {
+                    "Product Name": {"Dropdown":null, "Unit": null },
+                    "Quantity in stock": {"Dropdown":null, "Unit": "Units" },
+                    "Redemption Amt": {"Dropdown":null, "Unit": "Coins" },
+                    "Product Category": {"Dropdown":["Spotify","uihefdj","judi"], "Unit": null },
+                    "Delivery Method": {"Dropdown":["BHaskar","Spotify","judi"], "Unit": null },
+                  }
                 },
                 {
                   src: "https://i0.wp.com/www.alphr.com/wp-content/uploads/2020/03/How-to-Add-Device-for-Google-Play.jpg?fit=1000%2C563&ssl=1",
-                  title: "Google Play"
+                  title: "Google Play",
+                  "Product Details": {
+                    "Product Name": {"Dropdown":null, "Unit": null },
+                    "Quantity in stock": {"Dropdown":null, "Unit": "Units" },
+                    "Redemption Amt": {"Dropdown":null, "Unit": "Coins" },
+                    "Product Category": {"Dropdown":["Google Play","uihefdj","judi"], "Unit": null },
+                    "Delivery Method": {"Dropdown":["BHaskar","Google Play","judi"], "Unit": null },
+                  }
                 },
                 {
                   src: "https://en.mzadqatar.com//uploads/images/2020/25/04/10364932-lthmx0zntprzyjj.png",
-                  title: "Apple"
+                  title: "Apple",
+                  "Product Details": {
+                    "Product Name": {"Dropdown":null, "Unit": null },
+                    "Quantity in stock": {"Dropdown":null, "Unit": "Units" },
+                    "Redemption Amt": {"Dropdown":null, "Unit": "Coins" },
+                    "Product Category": {"Dropdown":["Apple","uihefdj","judi"], "Unit": null },
+                    "Delivery Method": {"Dropdown":["BHaskar","Apple","judi"], "Unit": null },
+                  }
                 },
               ]}
-              ProductDetaisJson={{
-                "Product Image": "https://wallpaperaccess.com/full/1308159.jpg",
-                "Product Details": {
-                  "Product Name": {"Dropdown":null, "Unit": null },
-                  "Quantity in stock": {"Dropdown":null, "Unit": "Units" },
-                  "Redemption Amt": {"Dropdown":null, "Unit": "Coins" },
-                  "Product Category": {"Dropdown":["BHaskar","uihefdj","judi"], "Unit": null },
-                  "Delivery Method": {"Dropdown":["BHaskar","uihefdj","judi"], "Unit": null },
-                }
-              }}
+              
             />
           </div>
         </div>

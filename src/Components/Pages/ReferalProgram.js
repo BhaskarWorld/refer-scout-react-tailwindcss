@@ -3,30 +3,48 @@ import { useState } from "react";
 import { isArray, isDict } from "../../Utilities/Utils"
 import DynamicHeroIcon from "../DynamicHeroIcons";
 
+
+
+
 const ToggleSwitch = ({ toggle, setToggle, className }) => {
     return (
         <div
             className={`${className} ${!toggle ? "bg-gray-300" : " bg-blue-500"}  scale-75 lg:scale-90 overflow-hidden relative rounded-full`}
             onClick={setToggle}
         >
-
             <div className={`absolute ${toggle ? 'border-blue-500' : 'translate-x-full border-gray-300'} border-2 z-50 left-0 transition-all duration-300 ease-out aspect-square h-full rounded-full bg-white`}></div>
             <div className={`absolute ${toggle ? 'text-white pr-1.5' : '-translate-x-full text-gray-400 mr-0.5 '} right-0  transition-all duration-300 ease-out  h-full text-xs font-medium center-items `}>{toggle ? 'ON' : "OFF"}</div>
 
         </div>
     );
 }
-const ReferalProgram = ({ CardsJson, ProductDetaisJson }) => {
+
+
+
+const ReferalProgram = ({ CardsJson }) => {
+
+
     const Card = isArray(CardsJson) ? CardsJson : [];
-    const ProductDetais = isDict(ProductDetaisJson)
-        ? isDict(ProductDetaisJson["Product Details"])
-            ? ProductDetaisJson["Product Details"] : {}
+
+    const [CoinsAccumulation, setCoinsAccumulation] = useState(false);
+    const [Rewards, setRewards] = useState(false);
+    const [ProductDetailsJson, SetProductDetailsJson] = useState({});
+
+
+
+
+    const ProductDetails = isDict(ProductDetailsJson)
+        ? ("Product Details" in ProductDetailsJson) || isDict(ProductDetailsJson["Product Details"])
+            ? ProductDetailsJson["Product Details"]
+            : {}
         : {};
-    const ProductDetaisList = []
-    Object.entries(ProductDetais)
+
+
+    const ProductDetailsList = []
+    Object.entries(ProductDetails)
         .forEach(
             ([ProductName, ProductValue], index) => {
-                ProductDetaisList.push(
+                ProductDetailsList.push(
                     <div className="w-full h-full" key={index}>
                         <div className="grid grid-flow-row grid-cols-12 justify-between items-center h-full ">
                             <div className="h-full text-gray-500 text-base font-thin  col-span-12">
@@ -58,13 +76,13 @@ const ReferalProgram = ({ CardsJson, ProductDetaisJson }) => {
                                         <div className="hidden peer-focus:block relative h-0 w-full bg-red-700">
                                             <div htmlFor={ProductName} class=" absolute z-50 h-20 w-full  bg-bwhite rounded divide-y opacity-100 overflow-y-scroll no-scrollbar overflow-x-hidden divide-gray-100 shadow">
                                                 <ul class="py-1 text-sm bg-white opacity-100 text-gray-700" aria-labelledby="dropdownDefault">
-                                                   
-                                                    {ProductValue.Dropdown .map((item, index) => {
+
+                                                    {ProductValue.Dropdown.map((item, index) => {
                                                         return (
                                                             <li key={index}>
-                                                            <a href="#" class="block py-2 px-4 hover:bg-gray-100">{item}</a>   
-    
-                                                        </li>
+                                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100">{item}</a>
+
+                                                            </li>
                                                         )
                                                     })}
 
@@ -99,8 +117,9 @@ const ReferalProgram = ({ CardsJson, ProductDetaisJson }) => {
 
 
 
-    const [CoinsAccumulation, setCoinsAccumulation] = useState(false);
-    const [Rewards, setRewards] = useState(false);
+
+
+
 
 
     return (
@@ -157,14 +176,20 @@ const ReferalProgram = ({ CardsJson, ProductDetaisJson }) => {
                         </div>
                         {/* Cards */}
                         <div className="grid grid-flow-row grid-cols-12 justify-evenly gap-5 sm:gap-2 md:gap-2 lg:gap-3 xl:gap-4 2xl:gap-5 mt-5 mr-5 ">
-                            <div className="col-span-12 sm:col-span-6 2xl:col-span-4  ">
+                            <div
+                                className="col-span-12 sm:col-span-6 2xl:col-span-4  "
+                                onClick={() => SetProductDetailsJson({})}
+                            >
                                 <Cards className="h-full w-full  border-2 border-gray-400 border-dotted" />
                             </div>
                             {Card.map((card, index) => {
                                 return (
-                                    <div className="col-span-12 sm:col-span-6 2xl:col-span-4 overflow-hidden shadow-lg rounded-lg transform hover:scale-105 transition-all duration-500 ease-in-out " key={index}>
+                                    <div
+                                        className="col-span-12 sm:col-span-6 2xl:col-span-4 overflow-hidden shadow-lg rounded-lg transform hover:scale-105 transition-all duration-500 ease-in-out "
+                                        key={index}
+                                        onClick={() => SetProductDetailsJson(card)}
+                                    >
                                         <Cards className="h-full w-full"
-                                            // <Cards className="h-30 md:h-28  xl:h-32"
                                             ImageSource={card.src}
                                             ImageAlt={card.title} key={index} />
                                     </div>
@@ -183,18 +208,28 @@ const ReferalProgram = ({ CardsJson, ProductDetaisJson }) => {
                         </div>
                         <div className="center-items flex flex-row">
                             {/* Detail card */}
-                            <div className="flex-grow rounded-lg   object-cover shadow-xl mt-5 mx-5 ">
-                                <div className="overflow-hidden rounded-t-lg  flex-shrink basis-1/3 ">
+                            {(isDict(ProductDetailsJson) && 'src' in ProductDetailsJson) &&
+                                <div className="flex-grow rounded-lg   object-cover shadow-xl mt-5 mx-5 transition-all duration-300 ease-in-out ">
 
-                                    <img className=" transform hover:scale-110 object-cover h-30 transition-all duration-300 ease-in-out"
-                                        src={ProductDetaisJson["Product Image"]}
-                                        alt="Product Image" />
+                                    <div className="overflow-hidden rounded-t-lg  flex-shrink basis-1/3 ">
+                                        <img className=" transform hover:scale-110 object-cover h-30 transition-all duration-300 ease-in-out"
+                                            src={ProductDetailsJson["src"]}
+                                        />
+                                    </div>
+                                    <div className="grid grid-flow-col grid-rows-5 gap-5 p-3 sm:p-5 md:p-5 lg:p-6">
+                                        {ProductDetailsList}
+                                    </div>
                                 </div>
+                            }
 
-                                <div className="grid grid-flow-col grid-rows-5 gap-5 p-3 sm:p-5 md:p-5 lg:p-6">
-                                    {ProductDetaisList}
+
+                            {!(isDict(ProductDetailsJson) && 'src' in ProductDetailsJson) &&
+                                <div className="flex-grow rounded-lg   object-cover shadow-xl mt-5 mx-5 transition-all duration-300 ease-in-out ">
+                                    <div className="center-items h-52 px-5"> 
+                                        <div className="text-gray-400 font-medium text-normal">Please select a card to view details.</div>
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
