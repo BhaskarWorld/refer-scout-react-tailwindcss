@@ -49,7 +49,7 @@ body {
 
 /* Layout Styles */
 .layout-main-app{
-  @apply flex flex-row h-full w-full;
+  @apply flex flex-row min-h-screen w-full;
 }
 .layout-side-bar{
   @apply flex-shrink basis-44 md:basis-52 lg:basis-56 xl:basis-60 transition-all ease-in-out;
@@ -79,7 +79,7 @@ body {
 }
 
 .avatar{
-  @apply rounded-full bg-blue-700 center-items text-white capitalize  xl:text-xl lg:text-lg md:text-base xl:w-9 xl:h-9 lg:w-8 lg:h-8 md:w-7 md:h-7 w-6 h-6
+  @apply rounded-full bg-blue-700 center-items text-white capitalize  xl:text-xl lg:text-lg md:text-base sm:text-sm xl:w-9 xl:h-9 lg:w-8 lg:h-8 w-6 h-6
 }
 
 
